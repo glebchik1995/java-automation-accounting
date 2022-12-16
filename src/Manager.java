@@ -70,11 +70,10 @@ public class Manager {
 
     void checkReports() {
 
-        if (yearLists.isEmpty() && monthLists.isEmpty()) {
+        if (yearLists.isEmpty() || monthLists.isEmpty()) { //Исправил && на ||
             System.out.println("Сперва считайте отчеты");
             System.out.println();
         } else {
-
 
             ArrayList<Integer> profitMonth = new ArrayList<>();
 

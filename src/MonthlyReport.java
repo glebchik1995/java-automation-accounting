@@ -20,7 +20,7 @@ public class MonthlyReport {
             monthList.add(monthRecord);
             }
         } else
-            System.out.println("Ошибка");
+            System.out.println("Ошибка считыванивая отчета");
     }
 
     public void dataMonth() {
