@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -14,15 +15,15 @@ public class Main {
             int userInput = scanner.nextInt();
 
             if (userInput == 1) {
-            manager.readMonthlyReport();
+                manager.readMonthlyReport(); //метод вызвается
             } else if (userInput == 2) {
-            manager.readYearlyReport();
+                manager.readYearlyReport();//метод вызвается
             } else if (userInput == 3) {
-            manager.checkReports();
+                manager.checkReports();
             } else if (userInput == 4) {
-            manager.printMonthReport();
+                manager.printMonthReport();
             } else if (userInput == 5) {
-            manager.printYearReport();
+                manager.printYearReport();
             } else if (userInput == 0) {
                 System.out.println("Выход");
                 break;
@@ -31,6 +32,7 @@ public class Main {
             }
         }
     }
+
     public static void printMenu() {
 
         System.out.println("Что вы хотите сделать? ");

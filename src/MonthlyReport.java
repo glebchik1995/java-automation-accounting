@@ -7,6 +7,7 @@ public class MonthlyReport {
     public MonthlyReport(int month) {
 
         String content = FileReader.readFileContentsOrNull("resources/m.20210" + month + ".csv");
+        if(content != null){
         String[] lines = content.split(System.lineSeparator());
         for (int j = 1; j < lines.length; j++) {
             String line = lines[j];
@@ -17,8 +18,11 @@ public class MonthlyReport {
             int sumOfOne = Integer.parseInt(parts[3]);
             MonthRecord monthRecord = new MonthRecord(itemName, isExpense, quantity, sumOfOne);
             monthList.add(monthRecord);
-        }
+            }
+        } else
+            System.out.println("Ошибка");
     }
+
     public void dataMonth() {
 
         HashMap<Integer, String> report = new HashMap<>();
@@ -40,8 +44,9 @@ public class MonthlyReport {
                     }
                 }
             }
-        } System.out.println("Самый прибыльный товар: " + report.get(maxProfit));
-          System.out.println("Прибыль составила: " + maxProfit);
+        }
+        System.out.println("Самый прибыльный товар: " + report.get(maxProfit));
+        System.out.println("Прибыль составила: " + maxProfit);
 
         for (MonthRecord monthRecord : monthList) {
 
@@ -54,9 +59,10 @@ public class MonthlyReport {
                     }
                 }
             }
-        } System.out.println("Самый затратный товар: " + expense.get(maxExpense));
-          System.out.println("Затрата составила: " + maxExpense);
         }
+        System.out.println("Самый затратный товар: " + expense.get(maxExpense));
+        System.out.println("Затрата составила: " + maxExpense);
+    }
     }
 
 

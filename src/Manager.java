@@ -1,13 +1,16 @@
 import java.util.ArrayList;
+
 public class Manager {
     public ArrayList<YearlyReport> yearLists = new ArrayList<>();
 
     public ArrayList<MonthlyReport> monthLists = new ArrayList<>();
-    void readMonthlyReport() {
+
+    void readMonthlyReport() { // Этот метод используется в main
 
         for (int i = 1; i <= 3; i++) {
             monthLists.add(new MonthlyReport(i));
-        } if (!monthLists.isEmpty()) {
+        }
+        if (!monthLists.isEmpty()) {
             System.out.println("Файл успешно считан");
             System.out.println();
         } else {
@@ -15,7 +18,8 @@ public class Manager {
             System.out.println();
         }
     }
-    void readYearlyReport() {
+
+    void readYearlyReport() { // Этот метод используется в main
 
         yearLists.add(new YearlyReport());
 
@@ -27,6 +31,7 @@ public class Manager {
             System.out.println();
         }
     }
+
     public void printYearReport() {
         if (!yearLists.isEmpty()) {
             YearlyReport year = yearLists.get(0);
@@ -38,6 +43,7 @@ public class Manager {
             System.out.println();
         }
     }
+
     public void printMonthReport() {
 
         if (!monthLists.isEmpty()) {
@@ -61,7 +67,8 @@ public class Manager {
             System.out.println();
         }
     }
-    void checkReports(){
+
+    void checkReports() {
 
         if (yearLists.isEmpty() && monthLists.isEmpty()) {
             System.out.println("Сперва считайте отчеты");
@@ -77,17 +84,17 @@ public class Manager {
 
             ArrayList<Integer> expensesYear = new ArrayList<>();
 
-            for (MonthlyReport monthlyReport : monthLists){
-            for (MonthRecord monthRecord: monthlyReport.monthList){
-                if (!monthRecord.isExpense) {
-                    profitMonth.add(monthRecord.quantity * monthRecord.sumOfOne);
-                } else {
-                    expensesMonth.add(monthRecord.quantity * monthRecord.sumOfOne);
-           }
-          }
-         }
-            for (YearlyReport yearlyReport : yearLists){
-                for (YearRecord yearRecord : yearlyReport.yearList){
+            for (MonthlyReport monthlyReport : monthLists) {
+                for (MonthRecord monthRecord : monthlyReport.monthList) {
+                    if (!monthRecord.isExpense) {
+                        profitMonth.add(monthRecord.quantity * monthRecord.sumOfOne);
+                    } else {
+                        expensesMonth.add(monthRecord.quantity * monthRecord.sumOfOne);
+                    }
+                }
+            }
+            for (YearlyReport yearlyReport : yearLists) {
+                for (YearRecord yearRecord : yearlyReport.yearList) {
                     if (!yearRecord.isExpense) {
                         profitYear.add(yearRecord.amount);
                     } else {
@@ -96,38 +103,38 @@ public class Manager {
                 }
             }
 
-            int profitInJanuary = profitMonth.get(0) + profitMonth.get(1) + profitMonth.get(2) ;
-            int profitInFebruary = profitMonth.get(3) + profitMonth.get(4) + profitMonth.get(5) ;
-            int profitInMarch = profitMonth.get(6) + profitMonth.get(7) + profitMonth.get(8) ;
+            int profitInJanuary = profitMonth.get(0) + profitMonth.get(1) + profitMonth.get(2);
+            int profitInFebruary = profitMonth.get(3) + profitMonth.get(4) + profitMonth.get(5);
+            int profitInMarch = profitMonth.get(6) + profitMonth.get(7) + profitMonth.get(8);
             int expensesInJanuary = expensesMonth.get(0) + expensesMonth.get(1) + expensesMonth.get(2);
             int expensesInFebruary = expensesMonth.get(3) + expensesMonth.get(4);
             int expensesInMarch = expensesMonth.get(5) + expensesMonth.get(6) + expensesMonth.get(7);
 
-            if (profitInJanuary != profitYear.get(0)){
+            if (profitInJanuary != profitYear.get(0)) {
                 System.out.println("Прибыль в отчете за Январь не совпадает");
             }
-            if (profitInFebruary != profitYear.get(1)){
+            if (profitInFebruary != profitYear.get(1)) {
                 System.out.println("Прибыль в отчете за Февраль не совпадает");
             }
-            if (profitInMarch != profitYear.get(2)){
+            if (profitInMarch != profitYear.get(2)) {
                 System.out.println("Прибыль в отчете за Март не совпадает");
             }
-            if (expensesInJanuary != expensesYear.get(0)){
+            if (expensesInJanuary != expensesYear.get(0)) {
                 System.out.println("Трата в отчете за Январь не совпадает");
             }
-            if (expensesInFebruary != expensesYear.get(1)){
+            if (expensesInFebruary != expensesYear.get(1)) {
                 System.out.println("Трата в отчете за Февраль не совпадает");
             }
-            if (expensesInMarch != expensesYear.get(2)){
+            if (expensesInMarch != expensesYear.get(2)) {
                 System.out.println("Трата в отчете за Март не совпадает");
             } else {
                 System.out.println("Траты и прибыль в месячном отчете полностью совпадают с годовым отчетом");
             }
 
-                }
-                    }
+        }
+    }
 
-            }
+}
 
 
 
