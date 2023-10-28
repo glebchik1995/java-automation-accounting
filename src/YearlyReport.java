@@ -33,10 +33,12 @@ public class YearlyReport {
         int expenses = 0;
 
         for (YearRecord yearRecord : yearList) {
-            if (!yearRecord.isExpense()) {
+            if (yearRecord.isExpense()) {
+                expensesMap.put(yearRecord.getMonth(), yearRecord.getAmount());
                 profitMap.put(yearRecord.getMonth(), yearRecord.getAmount());
             } else {
-                expensesMap.put(yearRecord.getMonth(), yearRecord.getAmount());
+                profitMap.put(yearRecord.getMonth(), yearRecord.getAmount());
+
             }
         }
 

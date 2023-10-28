@@ -85,13 +85,13 @@ public class Manager {
 
                 for (YearRecord yearRecord : yearlyReport.yearList) {
 
-                    if (!yearRecord.isExpense()) {
-
-                        profitYear.add(yearRecord.getAmount());
-
-                    } else {
+                    if (yearRecord.isExpense()) {
 
                         expensesYear.add(yearRecord.getAmount());
+                        
+                    } else {
+                        profitYear.add(yearRecord.getAmount());
+
                     }
                 }
             }
