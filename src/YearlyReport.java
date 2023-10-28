@@ -1,11 +1,13 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class YearlyReport {
     public ArrayList<YearRecord> yearList = new ArrayList<>();
 
     public YearlyReport() {
         String content = FileReader.readFileContentsOrNull("resources/y.2021.csv");
-        if (content != null) { //добавил проверку
+        if (content != null) {
             String[] lines = content.split(System.lineSeparator());
             for (int i = 1; i < lines.length; i++) {
                 String line = lines[i];
@@ -17,28 +19,43 @@ public class YearlyReport {
                 yearList.add(yearRecord);
             }
         } else
-            System.out.println("Ошибка считыванивая отчета");
+            System.out.println("Отчет пуст\n");
     }
 
     public void dataYear() {
 
-        ArrayList<Integer> profitList = new ArrayList<>();
+        Map<Integer, Integer> profitMap = new HashMap<>();
 
-        ArrayList<Integer> expensesList = new ArrayList<>();
+        Map<Integer, Integer> expensesMap = new HashMap<>();
+
+        int profit = 0;
+
+        int expenses = 0;
 
         for (YearRecord yearRecord : yearList) {
-            if (!yearRecord.isExpense) {
-                profitList.add(yearRecord.amount);
+            if (!yearRecord.isExpense()) {
+                profitMap.put(yearRecord.getMonth(), yearRecord.getAmount());
             } else {
-                expensesList.add(yearRecord.amount);
+                expensesMap.put(yearRecord.getMonth(), yearRecord.getAmount());
             }
         }
-        System.out.println("Прибыль в 1-м месяце составила: " + profitList.get(0));
-        System.out.println("Прибыль во 2-м месяце составила: " + profitList.get(1));
-        System.out.println("Прибыль в 3-м месяце составила: " + profitList.get(2));
-        System.out.println("Средний доход за все месяцы в году: " + (profitList.get(0) + profitList.get(1) + profitList.get(2)) / profitList.size());
-        System.out.println("Средний расход за все месяцы в году: " + (expensesList.get(0) + expensesList.get(1) + expensesList.get(2)) / expensesList.size());
+
+        for (Map.Entry<Integer, Integer> entry : profitMap.entrySet()) {
+            System.out.println("Прибыль за " + Constant.MONTHS[entry.getKey() - 1]
+                    + " составила: " + entry.getValue());
+            profit += entry.getValue();
+        }
+
+        System.out.println("Средний доход за год составил: " + profit / Constant.MONTHS.length);
+
+        for (int expense : expensesMap.values()) {
+            expenses += expense;
+        }
+
+        System.out.println("Средний расход за год составил: " + expenses / Constant.MONTHS.length + "\n");
+
     }
+
 }
 
 

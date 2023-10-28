@@ -8,27 +8,37 @@ public class Main {
 
         Manager manager = new Manager();
 
+        System.out.println("\n«Автоматизация бухгалтерии»\n");
+
         while (true) {
 
             printMenu();
 
             int userInput = scanner.nextInt();
 
-            if (userInput == 1) {
-                manager.readMonthlyReport(); //метод вызвается
-            } else if (userInput == 2) {
-                manager.readYearlyReport();//метод вызвается
-            } else if (userInput == 3) {
-                manager.checkReports();
-            } else if (userInput == 4) {
-                manager.printMonthReport();
-            } else if (userInput == 5) {
-                manager.printYearReport();
-            } else if (userInput == 0) {
-                System.out.println("Выход");
-                break;
-            } else {
-                System.out.println("Извините, такой команды пока нет.");
+            switch (userInput) {
+                case 1:
+                    manager.readMonthlyReport();
+                    break;
+                case 2:
+                    manager.readYearlyReport();
+                    break;
+                case 3:
+                    manager.checkReports();
+                    break;
+                case 4:
+                    manager.printMonthReport();
+                    break;
+                case 5:
+                    manager.printYearReport();
+                    break;
+                case 0:
+                    System.out.println("Выход");
+                    return;
+                default:
+                    System.out.println("Извините, такой команды пока нет.");
+                    break;
+
             }
         }
     }

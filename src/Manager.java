@@ -2,33 +2,28 @@ import java.util.ArrayList;
 
 public class Manager {
     public ArrayList<YearlyReport> yearLists = new ArrayList<>();
-
     public ArrayList<MonthlyReport> monthLists = new ArrayList<>();
 
-    void readMonthlyReport() { // Этот метод используется в main
+    void readMonthlyReport() {
 
         for (int i = 1; i <= 3; i++) {
             monthLists.add(new MonthlyReport(i));
         }
         if (!monthLists.isEmpty()) {
-            System.out.println("Файл успешно считан");
-            System.out.println();
+            System.out.println("Файл успешно считан\n");
         } else {
-            System.out.println("Не удалось считать");
-            System.out.println();
+            System.out.println("Не удалось считать\n");
         }
     }
 
-    void readYearlyReport() { // Этот метод используется в main
+    public void readYearlyReport() {
 
         yearLists.add(new YearlyReport());
 
         if (!yearLists.isEmpty()) {
-            System.out.println("Файл успешно считан");
-            System.out.println();
+            System.out.println("Файл успешно считан\n");
         } else {
-            System.out.println("Не удалось считать");
-            System.out.println();
+            System.out.println("Не удалось считать\n");
         }
     }
 
@@ -37,42 +32,31 @@ public class Manager {
             YearlyReport year = yearLists.get(0);
             System.out.println("Годовой отчет за 2021 год предоставлен: ");
             year.dataYear();
-            System.out.println();
         } else {
-            System.out.println("Сперва считайте годовой отчет");
-            System.out.println();
+            System.out.println("Сперва считайте годовой отчет\n");
         }
     }
 
     public void printMonthReport() {
 
         if (!monthLists.isEmpty()) {
-            MonthlyReport monthJanuary = monthLists.get(0);
-            System.out.println("Месячный отчет за Январь: ");
-            monthJanuary.dataMonth();
-            System.out.println();
-
-            MonthlyReport monthFebruary = monthLists.get(1);
-            System.out.println("Месячный отчет за Февраль: ");
-            monthFebruary.dataMonth();
-            System.out.println();
-
-            MonthlyReport monthMarch = monthLists.get(2);
-            System.out.println("Месячный отчет за Март: ");
-            monthMarch.dataMonth();
-            System.out.println();
+            for (int i = 0; i < monthLists.size(); i++) {
+                System.out.println("Месячный отчет за " + Constant.MONTHS[i] + " :");
+                MonthlyReport monthJanuary = monthLists.get(i);
+                monthJanuary.dataMonth();
+            }
 
         } else {
-            System.out.println("Сперва считайте месячный отчет");
-            System.out.println();
+            System.out.println("Сперва считайте месячный отчет \n");
         }
     }
 
     void checkReports() {
 
-        if (yearLists.isEmpty() || monthLists.isEmpty()) { //Исправил && на ||
-            System.out.println("Сперва считайте отчеты");
-            System.out.println();
+        if (yearLists.isEmpty() || monthLists.isEmpty()) {
+
+            System.out.println("Сперва считайте отчеты \n");
+
         } else {
 
             ArrayList<Integer> profitMonth = new ArrayList<>();
@@ -84,20 +68,30 @@ public class Manager {
             ArrayList<Integer> expensesYear = new ArrayList<>();
 
             for (MonthlyReport monthlyReport : monthLists) {
+
                 for (MonthRecord monthRecord : monthlyReport.monthList) {
-                    if (!monthRecord.isExpense) {
-                        profitMonth.add(monthRecord.quantity * monthRecord.sumOfOne);
+
+                    if (!monthRecord.isExpense()) {
+
+                        profitMonth.add(monthRecord.getQuantity() * monthRecord.getSumOfOne());
+
                     } else {
-                        expensesMonth.add(monthRecord.quantity * monthRecord.sumOfOne);
+
+                        expensesMonth.add(monthRecord.getQuantity() * monthRecord.getSumOfOne());
                     }
                 }
             }
             for (YearlyReport yearlyReport : yearLists) {
+
                 for (YearRecord yearRecord : yearlyReport.yearList) {
-                    if (!yearRecord.isExpense) {
-                        profitYear.add(yearRecord.amount);
+
+                    if (!yearRecord.isExpense()) {
+
+                        profitYear.add(yearRecord.getAmount());
+
                     } else {
-                        expensesYear.add(yearRecord.amount);
+
+                        expensesYear.add(yearRecord.getAmount());
                     }
                 }
             }
